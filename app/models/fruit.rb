@@ -10,7 +10,7 @@ class Fruit
         @id = opts["id"].to_i
         @name = opts["name"]
         @color = opts["color"]
-        @readyToEat = (opts["readytoeat"]=='t')?true:false
+        @readyToEat = (opts["readytoeat"]=='t') ? true : false
     end
 
     def self.all
@@ -24,7 +24,7 @@ class Fruit
     end
 
     def self.create(opts={})
-        results = DB.exec("INSERT INTO fruits (name, color, readytoeat) VALUES ( '#{opts["name"]}', '#{opts["color"]}', #{opts["readyToEat"]} );")
+        results = DB.exec("INSERT INTO fruits (name, color, readytoeat) VALUES ( '#{opts[:name]}', '#{opts[:color]}', #{opts[:readyToEat]} );")
         return { created: true }
     end
 
@@ -34,7 +34,7 @@ class Fruit
     end
 
     def self.update(id, opts={})
-        results = DB.exec("UPDATE fruits SET name='#{opts["name"]}', color='#{opts["color"]}', readytoeat=#{opts["readyToEat"]} WHERE id=#{id} ;")
+        results = DB.exec("UPDATE fruits SET name='#{opts[:name]}', color='#{opts[:color]}', readytoeat=#{opts[:readyToEat]} WHERE id=#{id} ;")
         return { updated: true }
     end
 end

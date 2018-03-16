@@ -14,4 +14,8 @@ class FruitsController < ApplicationController
     def create
         render json: Fruit.create(params["fruit"])
     end
+
+    def delete
+        render json: Fruit.delete(params[:id])
+    end
 end

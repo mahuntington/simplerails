@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   # get('/fruits', { :to => 'fruits#index' })
   get '/fruits/:id', to: 'fruits#show'
   post '/fruits', to: 'fruits#create'
+  delete '/fruits/:id', to: 'fruits#delete'
 end

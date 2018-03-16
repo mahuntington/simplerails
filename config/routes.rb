@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get '/fruits/:id', to: 'fruits#show'
   post '/fruits', to: 'fruits#create'
   delete '/fruits/:id', to: 'fruits#delete'
+  put '/fruits/:id', to: 'fruits#update'
 end

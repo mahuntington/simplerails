@@ -32,4 +32,9 @@ class Fruit
         results = DB.exec("DELETE FROM fruits WHERE id=#{id};")
         return { deleted: true }
     end
+
+    def self.update(id, opts={})
+        results = DB.exec("UPDATE fruits SET name='#{opts["name"]}', color='#{opts["color"]}', readytoeat=#{opts["readyToEat"]} WHERE id=#{id} ;")
+        return { updated: true }
+    end
 end

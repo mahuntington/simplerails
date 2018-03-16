@@ -18,4 +18,8 @@ class FruitsController < ApplicationController
     def delete
         render json: Fruit.delete(params[:id])
     end
+
+    def update
+        render json: Fruit.update(params[:id], params[:fruit])
+    end
 end

@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   get '/fruits', to: 'fruits#index'
   # get('/fruits', { :to => 'fruits#index' })
   get '/fruits/:id', to: 'fruits#show'
+  post '/fruits', to: 'fruits#create'
 end

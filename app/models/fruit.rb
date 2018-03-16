@@ -5,7 +5,7 @@ class Fruit
     else
         DB = PG.connect(host: "localhost", port: 5432, dbname: 'simplerails')
     end
-    
+
     def initialize(opts = {})
         @id = opts["id"].to_i
         @name = opts["name"]
@@ -21,5 +21,10 @@ class Fruit
     def self.find(id)
         results = DB.exec("SELECT * FROM fruits WHERE id=#{id};")
         return Fruit.new(results.first)
+    end
+
+    def self.create(opts={})
+        results = DB.exec("INSERT INTO fruits (name, color, readytoeat) VALUES ( '#{opts["name"]}', '#{opts["color"]}', #{opts["readyToEat"]} );")
+        return Fruit.new(opts)
     end
 end

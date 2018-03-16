@@ -25,7 +25,7 @@ class Fruit
 
     def self.create(opts={})
         results = DB.exec("INSERT INTO fruits (name, color, readytoeat) VALUES ( '#{opts["name"]}', '#{opts["color"]}', #{opts["readyToEat"]} );")
-        return Fruit.new(opts)
+        return { created: true }
     end
 
     def self.delete(id)

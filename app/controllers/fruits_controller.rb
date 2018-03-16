@@ -12,7 +12,7 @@ class FruitsController < ApplicationController
     end
 
     def create
-        render json: Fruit.create(params["fruit"])
+        render json: Fruit.create(params[:fruit])
     end
 
     def delete

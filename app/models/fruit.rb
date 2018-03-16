@@ -12,4 +12,9 @@ class Fruit
         results = DB.exec("SELECT * FROM fruits;")
         return results.map { |fruit_opts| Fruit.new(fruit_opts)}
     end
+
+    def self.find(id)
+        results = DB.exec("SELECT * FROM fruits WHERE id=#{id};")
+        return Fruit.new(results.first)
+    end
 end

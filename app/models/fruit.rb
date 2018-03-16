@@ -1,9 +1,15 @@
 class Fruit
+    DB = PG.connect(host: "localhost", port: 5432, dbname: 'simplerails')
+
+    def initialize(opts = {})
+        @id = opts["id"].to_i
+        @name = opts["name"]
+        @color = opts["color"]
+        @readyToEat = (opts["readytoeat"]=='t')?true:false
+    end
+
     def self.all
-        [
-            { name: 'apple', color: 'red', readyToEat: true },
-            { name: 'banana', color: 'yellow', readyToEat: false },
-            { name: 'orange', color: 'orange', readyToEat: false }
-        ]
+        results = DB.exec("SELECT * FROM fruits;")
+        return results.map { |fruit_opts| Fruit.new(fruit_opts)}
     end
 end

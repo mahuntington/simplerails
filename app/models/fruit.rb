@@ -6,35 +6,41 @@ class Fruit
         DB = PG.connect(host: "localhost", port: 5432, dbname: 'simplerails')
     end
 
-    def initialize(opts = {})
-        @id = opts["id"].to_i
-        @name = opts["name"]
-        @color = opts["color"]
-        @readyToEat = (opts["readytoeat"]=='t') ? true : false
-    end
-
     def self.all
         results = DB.exec("SELECT * FROM fruits;")
-        return results.map { |fruit_opts| Fruit.new(fruit_opts)}
+        results.map do |fruit_opts|
+            fruit_opts["id"].to_i
+            {
+                id: fruit_opts["id"].to_i,
+                name: fruit_opts["name"],
+                color: fruit_opts["color"],
+                readyToEat: (fruit_opts["readytoeat"] == "t") ? true : false
+            }
+        end
     end
 
     def self.find(id)
         results = DB.exec("SELECT * FROM fruits WHERE id=#{id};")
-        return Fruit.new(results.first)
+        {
+            id: results.first["id"].to_i,
+            name: results.first["name"],
+            color: results.first["color"],
+            readyToEat: (results.first["readytoeat"] == "t") ? true : false
+        }
     end
 
     def self.create(opts={})
         results = DB.exec("INSERT INTO fruits (name, color, readytoeat) VALUES ( '#{opts[:name]}', '#{opts[:color]}', #{opts[:readyToEat]} );")
-        return { created: true }
+        { created: true }
     end
 
     def self.delete(id)
         results = DB.exec("DELETE FROM fruits WHERE id=#{id};")
-        return { deleted: true }
+        { deleted: true }
     end
 
     def self.update(id, opts={})
         results = DB.exec("UPDATE fruits SET name='#{opts[:name]}', color='#{opts[:color]}', readytoeat=#{opts[:readyToEat]} WHERE id=#{id} ;")
-        return { updated: true }
+        { updated: true }
     end
 end
